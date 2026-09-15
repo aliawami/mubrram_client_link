@@ -1,0 +1,270 @@
+/* Palette matches lib/core/services/pdf/*.dart exactly, for visual
+   consistency with the generated PDFs and the app itself. */
+:root {
+  --accent: #c47b2b;
+  --accent-soft: #f5e6d3;
+  --ink: #14110f;
+  --ink2: #5c5650;
+  --ink3: #726c66;
+  --line: #e8e5df;
+  --bg-canvas: #faf9f5;
+  --bg-surface: #ffffff;
+  --bg-soft: #f0eded;
+  --success: #1a7d52;
+  --success-soft: #e5f5ee;
+  --info: #1d6fae;
+  --info-soft: #e8f0f9;
+  --danger: #c03a2b;
+  --danger-soft: #fceae8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-canvas);
+  color: var(--ink);
+  font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  padding: 8px 4px 20px;
+}
+.brand-mark {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 20px;
+  flex: 1;
+}
+
+/* ── Loading / error states ── */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 8px;
+  gap: 8px;
+}
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.error-title { font-weight: 700; font-size: 16px; }
+.error-detail { color: var(--ink2); font-size: 14px; margin: 0; }
+
+/* ── Document view ── */
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.muted { color: var(--ink2); font-size: 13px; margin: 0; }
+.muted.small { font-size: 12px; color: var(--ink3); }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.badge-sent { background: var(--info-soft); color: var(--info); }
+.badge-accepted { background: var(--success-soft); color: var(--success); }
+.badge-rejected { background: var(--danger-soft); color: var(--danger); }
+.badge-expired, .badge-draft { background: var(--bg-soft); color: var(--ink2); }
+
+.doc-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 4px 0 2px;
+}
+
+.section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.section-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink2);
+  margin: 0 0 8px;
+}
+.scope-text {
+  font-size: 14px;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+.line-items {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.line-items td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+.line-items td:last-child {
+  text-align: left;
+  color: var(--ink2);
+  white-space: nowrap;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-soft);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 20px;
+  border-top: none;
+}
+.total-amount {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.kv-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.decided-note {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink2);
+  background: var(--bg-soft);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+/* ── Buttons ── */
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:disabled { opacity: 0.6; cursor: default; }
+.btn-ghost { background: transparent; color: var(--ink2); border: 1px solid var(--line); }
+.btn-text {
+  background: transparent;
+  color: var(--ink2);
+  border: none;
+  margin-top: 20px;
+  font-size: 13px;
+  text-decoration: underline;
+  width: auto;
+  padding: 8px;
+}
+
+.disclaimer {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--ink3);
+  font-size: 12px;
+}
+.disclaimer p { margin: 4px 0; }
+.powered-by { color: var(--accent); }
+
+/* ── Identity modal ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 17, 15, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 10;
+}
+.modal {
+  background: var(--bg-surface);
+  border-radius: 16px 16px 0 0;
+  padding: 24px 20px 32px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+.modal-title { font-weight: 700; font-size: 17px; margin: 0 0 6px; }
+.modal-subtitle { color: var(--ink2); font-size: 13px; margin: 0 0 18px; }
+.digit-input {
+  width: 140px;
+  font-size: 26px;
+  letter-spacing: 10px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-family: inherit;
+}
+.digit-input:focus { outline: none; border-color: var(--accent); }
+.modal-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin: 10px 0 0;
+}
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+.modal-note {
+  margin-top: 16px;
+  color: var(--ink3);
+  font-size: 12px;
+}
+
+[hidden] { display: none !important; }
+
+/* ── Print (the "download PDF" affordance — browser's own print-to-PDF) ── */
+@media print {
+  body { background: #fff; }
+  .brand, .actions, .btn-text, .disclaimer { display: none !important; }
+  .card { border: none; padding: 0; }
+}

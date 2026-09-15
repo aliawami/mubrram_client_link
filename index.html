@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>مُبرم</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="brand">
+      <span class="brand-mark">مُبرم</span>
+    </header>
+
+    <main id="app" class="card" aria-live="polite">
+      <div id="state-loading" class="state">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>جارِ التحميل...</p>
+      </div>
+
+      <div id="state-error" class="state" hidden>
+        <p class="error-title">تعذّر فتح هذا الرابط</p>
+        <p class="error-detail">قد يكون الرابط غير صحيح أو منتهي الصلاحية أو تم إبطاله من قِبل المُرسل.</p>
+      </div>
+
+      <div id="state-quotation" class="doc" hidden>
+        <div class="doc-header">
+          <span id="q-status" class="badge"></span>
+          <p id="q-seller" class="muted"></p>
+        </div>
+        <h1 id="q-title" class="doc-title"></h1>
+        <p id="q-number" class="muted small"></p>
+
+        <section class="section">
+          <h2 class="section-label">نطاق العمل</h2>
+          <div id="q-scope-text" class="scope-text"></div>
+          <table id="q-line-items" class="line-items" hidden></table>
+        </section>
+
+        <section class="section total-row">
+          <span>الإجمالي</span>
+          <span id="q-total" class="total-amount"></span>
+        </section>
+
+        <section id="q-valid-until-row" class="kv-row" hidden>
+          <span class="muted">صالح حتى</span>
+          <span id="q-valid-until"></span>
+        </section>
+
+        <section id="q-notes-section" class="section" hidden>
+          <h2 class="section-label">ملاحظات وشروط</h2>
+          <p id="q-notes" class="scope-text"></p>
+        </section>
+
+        <section id="q-decision-actions" class="actions" hidden>
+          <button id="q-accept-btn" class="btn btn-primary">قبول العرض</button>
+          <button id="q-decline-btn" class="btn btn-ghost">رفض العرض</button>
+        </section>
+
+        <p id="q-decided-note" class="decided-note" hidden></p>
+
+        <button id="q-download-btn" class="btn btn-text">تنزيل PDF</button>
+      </div>
+    </main>
+
+    <footer class="disclaimer">
+      <p>هذا المستند عبارة عن قالب قابل للتوقيع، وليس استشارة قانونية.</p>
+      <p class="powered-by">تم إنشاؤه بواسطة مُبرم</p>
+    </footer>
+  </div>
+
+  <!-- Identity check modal — shown only before a binding action (accept/decline), never for plain viewing. -->
+  <div id="identity-modal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="identity-title">
+      <p id="identity-title" class="modal-title">تأكيد الهوية</p>
+      <p id="identity-subtitle" class="modal-subtitle">
+        للمتابعة، أدخل آخر 4 أرقام من رقم جوالك المسجل لدى المُرسل
+      </p>
+      <input id="identity-input" class="digit-input" type="tel" inputmode="numeric" pattern="[0-9]*"
+             maxlength="4" autocomplete="off" aria-label="آخر 4 أرقام من رقم الجوال" />
+      <p id="identity-error" class="modal-error" hidden></p>
+      <div class="modal-actions">
+        <button id="identity-confirm-btn" class="btn btn-primary">تأكيد ومتابعة</button>
+        <button id="identity-cancel-btn" class="btn btn-ghost">إلغاء</button>
+      </div>
+      <p class="modal-note">🔒 خطوة واحدة لحماية القرار — لا حساب ولا كلمة مرور</p>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

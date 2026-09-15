@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "client_interaction",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8942"],
+      "port": 8942
+    }
+  ]
+}
