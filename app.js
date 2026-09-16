@@ -58,9 +58,10 @@ function renderQuotation(doc, verified) {
 
   document.getElementById('q-status').textContent = STATUS_LABELS[doc.status] || doc.status;
   document.getElementById('q-status').className = `badge badge-${doc.status}`;
-  document.getElementById('q-seller').textContent = doc.seller_name ? `من ${doc.seller_name}` : '';
   document.getElementById('q-title').textContent = doc.title;
   document.getElementById('q-number').textContent = doc.quotation_number ? `رقم العرض: ${doc.quotation_number}` : '';
+  document.getElementById('q-client-name').textContent = doc.client || '—';
+  document.getElementById('q-seller-name').textContent = doc.seller_name || '—';
 
   const lineItems = doc.line_items || [];
   const scopeTextEl = document.getElementById('q-scope-text');

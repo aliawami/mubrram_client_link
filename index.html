@@ -29,11 +29,28 @@
 
       <div id="state-quotation" class="doc" hidden>
         <div class="doc-header">
+          <p class="doc-kind">عرض سعر</p>
           <span id="q-status" class="badge"></span>
-          <p id="q-seller" class="muted"></p>
         </div>
         <h1 id="q-title" class="doc-title"></h1>
         <p id="q-number" class="muted small"></p>
+
+        <div class="party-cards">
+          <div class="party-card">
+            <p class="party-label">الطرف الأول — العميل</p>
+            <div class="party-kv">
+              <span class="muted">الاسم</span>
+              <span id="q-client-name"></span>
+            </div>
+          </div>
+          <div class="party-card">
+            <p class="party-label">الطرف الثاني — المورد</p>
+            <div class="party-kv">
+              <span class="muted">الاسم</span>
+              <span id="q-seller-name"></span>
+            </div>
+          </div>
+        </div>
 
         <section class="section">
           <h2 class="section-label">نطاق العمل</h2>

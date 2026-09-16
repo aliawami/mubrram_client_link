@@ -98,10 +98,53 @@ body {
 .badge-rejected { background: var(--danger-soft); color: var(--danger); }
 .badge-expired, .badge-draft { background: var(--bg-soft); color: var(--ink2); }
 
+.doc-kind {
+  font-size: 13px;
+  color: var(--ink2);
+  margin: 0 0 4px;
+}
+
 .doc-title {
   font-size: 22px;
   font-weight: 700;
   margin: 4px 0 2px;
+}
+
+/* Mirrors quotation_pdf.dart's _partyCardsRow/_partyCard — both parties
+   shown the same way the generated PDF shows them. */
+.party-cards {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.party-card {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.party-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.party-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+}
+.party-kv .muted { font-size: 11px; }
+.party-kv span:last-child {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+/* Two side-by-side cards get tight on the narrowest phones — stack instead
+   of letting names truncate. */
+@media (max-width: 340px) {
+  .party-cards { flex-direction: column; }
 }
 
 .section {
