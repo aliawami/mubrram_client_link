@@ -220,12 +220,29 @@ function closeIdentityModal() {
   document.getElementById('identity-modal').hidden = true;
 }
 
+// An Arabic (or Persian/Urdu) keyboard produces Arabic-Indic digits
+// (١٢٣٤٥٦٧٨٩٠ / ۰۱۲۳۴۵۶۷۸۹) instead of Western ones for numeric input —
+// very common on this exact kind of device/locale, and \d in a JS regex
+// only ever matches [0-9]. Without this, a client typing their own real
+// phone digits on their own Arabic keyboard would be told they didn't
+// enter 4 digits, when they plainly did.
+function normalizeDigits(str) {
+  const arabicIndic = '٠١٢٣٤٥٦٧٨٩';
+  const easternArabicIndic = '۰۱۲۳۴۵۶۷۸۹';
+  return str.replace(/[٠-٩۰-۹]/g, (ch) => {
+    const i = arabicIndic.indexOf(ch);
+    if (i !== -1) return String(i);
+    const j = easternArabicIndic.indexOf(ch);
+    return j !== -1 ? String(j) : ch;
+  });
+}
+
 async function submitIdentity() {
   const token = getToken();
   const input = document.getElementById('identity-input');
   const error = document.getElementById('identity-error');
   const confirmBtn = document.getElementById('identity-confirm-btn');
-  const digits = input.value.trim();
+  const digits = normalizeDigits(input.value.trim());
 
   if (!/^\d{4}$/.test(digits)) {
     error.hidden = false;
