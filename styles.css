@@ -267,4 +267,9 @@ body {
   body { background: #fff; }
   .brand, .actions, .btn-text, .disclaimer { display: none !important; }
   .card { border: none; padding: 0; }
+  /* .page's 100vh min-height (needed on-screen so a short document still
+     fills the viewport) otherwise forces the printable area to a full
+     screen height, pushing out a blank second page even when the actual
+     content is a single short page. */
+  .page { min-height: 0; }
 }
