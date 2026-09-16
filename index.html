@@ -82,6 +82,72 @@
 
         <button id="q-download-btn" class="btn btn-text">تنزيل PDF</button>
       </div>
+
+      <div id="state-contract" class="doc" hidden>
+        <div class="doc-header">
+          <p class="doc-kind">عقد</p>
+          <span id="c-status" class="badge"></span>
+        </div>
+        <h1 id="c-title" class="doc-title"></h1>
+        <p id="c-number" class="muted small"></p>
+
+        <div class="party-cards">
+          <div class="party-card">
+            <p class="party-label">الطرف الأول — العميل</p>
+            <div class="party-kv">
+              <span class="muted">الاسم</span>
+              <span id="c-client-name"></span>
+            </div>
+          </div>
+          <div class="party-card">
+            <p class="party-label">الطرف الثاني — المورد</p>
+            <div class="party-kv">
+              <span class="muted">الاسم</span>
+              <span id="c-seller-name"></span>
+            </div>
+          </div>
+        </div>
+
+        <section class="section">
+          <h2 class="section-label">نطاق العمل</h2>
+          <p id="c-scope-text" class="scope-text"></p>
+        </section>
+
+        <section class="section total-row">
+          <span>قيمة العقد</span>
+          <span id="c-price" class="total-amount"></span>
+        </section>
+
+        <section id="c-date-row" class="kv-row" hidden>
+          <span class="muted">تاريخ العقد</span>
+          <span id="c-date"></span>
+        </section>
+
+        <section id="c-milestones-section" class="section" hidden>
+          <h2 class="section-label">جدول الدفعات</h2>
+          <table id="c-milestones" class="line-items"></table>
+        </section>
+
+        <section class="section">
+          <h2 class="section-label">التوقيع</h2>
+
+          <div id="c-signed-view" class="signed-view" hidden>
+            <img id="c-signature-img" class="signature-img" alt="التوقيع" />
+            <p id="c-signed-date" class="muted small"></p>
+          </div>
+
+          <div id="c-sign-pad-section" hidden>
+            <p class="muted small" style="margin-bottom: 8px;">وقّع بإصبعك أو الفأرة في المساحة أدناه</p>
+            <canvas id="c-signature-pad" class="signature-pad" width="440" height="160"></canvas>
+            <div class="sig-pad-actions">
+              <button id="c-sig-clear-btn" class="btn btn-text" style="margin-top: 0;">مسح</button>
+            </div>
+            <button id="c-sign-btn" class="btn btn-primary" style="margin-top: 12px;" disabled>توقيع</button>
+          </div>
+        </section>
+
+        <button id="c-download-btn" class="btn btn-text">تنزيل PDF</button>
+      </div>
     </main>
 
     <footer class="disclaimer">
