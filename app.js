@@ -215,6 +215,29 @@ function renderInvoice(doc) {
   document.getElementById('i-client-name').textContent = doc.client || '—';
   document.getElementById('i-seller-name').textContent = doc.seller_name || '—';
 
+  // line_items/scope are only present when this invoice was auto-filled
+  // from a quotation (see invoice_client_projection) — absent for
+  // standalone, milestone, or contract-linked invoices.
+  const itemsSection = document.getElementById('i-items-section');
+  const itemsScopeTextEl = document.getElementById('i-scope-text');
+  const itemsLineItemsEl = document.getElementById('i-line-items');
+  const itemsLineItems = doc.line_items || [];
+  if (itemsLineItems.length > 0) {
+    itemsSection.hidden = false;
+    itemsScopeTextEl.hidden = true;
+    itemsLineItemsEl.hidden = false;
+    itemsLineItemsEl.innerHTML = itemsLineItems
+      .map((li) => `<tr><td>${escapeHtml(li.description)}</td><td>${formatAmount(li.price)} ر.س</td></tr>`)
+      .join('');
+  } else if (doc.scope) {
+    itemsSection.hidden = false;
+    itemsScopeTextEl.hidden = false;
+    itemsScopeTextEl.textContent = doc.scope;
+    itemsLineItemsEl.hidden = true;
+  } else {
+    itemsSection.hidden = true;
+  }
+
   const subtotalRow = document.getElementById('i-subtotal-row');
   const vatRow = document.getElementById('i-vat-row');
   if (doc.vat_enabled) {
