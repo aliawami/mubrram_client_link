@@ -97,7 +97,7 @@ body {
 .badge-accepted { background: var(--success-soft); color: var(--success); }
 .badge-rejected { background: var(--danger-soft); color: var(--danger); }
 .badge-expired, .badge-draft, .badge-cancelled { background: var(--bg-soft); color: var(--ink2); }
-.badge-completed { background: var(--success-soft); color: var(--success); }
+.badge-completed, .badge-paid { background: var(--success-soft); color: var(--success); }
 
 .doc-kind {
   font-size: 13px;

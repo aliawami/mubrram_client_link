@@ -148,6 +148,58 @@
 
         <button id="c-download-btn" class="btn btn-text">تنزيل PDF</button>
       </div>
+
+      <div id="state-invoice" class="doc" hidden>
+        <div class="doc-header">
+          <p class="doc-kind">فاتورة</p>
+          <span id="i-status" class="badge"></span>
+        </div>
+        <h1 id="i-title" class="doc-title"></h1>
+        <p id="i-number" class="muted small"></p>
+
+        <div class="party-cards">
+          <div class="party-card">
+            <p class="party-label">الطرف الأول — العميل</p>
+            <div class="party-kv">
+              <span class="muted">الاسم</span>
+              <span id="i-client-name"></span>
+            </div>
+          </div>
+          <div class="party-card">
+            <p class="party-label">الطرف الثاني — المورد</p>
+            <div class="party-kv">
+              <span class="muted">الاسم</span>
+              <span id="i-seller-name"></span>
+            </div>
+          </div>
+        </div>
+
+        <section id="i-subtotal-row" class="kv-row" hidden>
+          <span class="muted">المبلغ قبل الضريبة</span>
+          <span id="i-subtotal"></span>
+        </section>
+        <section id="i-vat-row" class="kv-row" hidden>
+          <span class="muted">ضريبة القيمة المضافة ١٥٪</span>
+          <span id="i-vat"></span>
+        </section>
+
+        <section class="section total-row">
+          <span>المبلغ المستحق</span>
+          <span id="i-total" class="total-amount"></span>
+        </section>
+
+        <section id="i-due-date-row" class="kv-row" hidden>
+          <span class="muted">تاريخ الاستحقاق</span>
+          <span id="i-due-date"></span>
+        </section>
+
+        <section id="i-note-section" class="section" hidden>
+          <h2 class="section-label">ملاحظات</h2>
+          <p id="i-note" class="scope-text"></p>
+        </section>
+
+        <button id="i-download-btn" class="btn btn-text">تنزيل PDF</button>
+      </div>
     </main>
 
     <footer class="disclaimer">

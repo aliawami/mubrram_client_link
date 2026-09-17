@@ -194,6 +194,60 @@ function renderContract(doc, verified) {
   showState('state-contract');
 }
 
+const INVOICE_STATUS_LABELS = {
+  draft: 'مسودة',
+  sent: 'مُرسل',
+  paid: 'مدفوع',
+  cancelled: 'ملغى',
+};
+
+// Read-only by design — no binding action, no identity gate needed at all
+// (viewing was always frictionless; this document type just has nothing
+// gated to view past). No IBAN either — it's never stored server-side to
+// begin with (see invoice_client_projection's migration comment).
+function renderInvoice(doc) {
+  currentDocument = doc;
+
+  document.getElementById('i-status').textContent = INVOICE_STATUS_LABELS[doc.status] || doc.status;
+  document.getElementById('i-status').className = `badge badge-${doc.status}`;
+  document.getElementById('i-title').textContent = doc.title;
+  document.getElementById('i-number').textContent = doc.invoice_number ? `رقم الفاتورة: ${doc.invoice_number}` : '';
+  document.getElementById('i-client-name').textContent = doc.client || '—';
+  document.getElementById('i-seller-name').textContent = doc.seller_name || '—';
+
+  const subtotalRow = document.getElementById('i-subtotal-row');
+  const vatRow = document.getElementById('i-vat-row');
+  if (doc.vat_enabled) {
+    subtotalRow.hidden = false;
+    vatRow.hidden = false;
+    document.getElementById('i-subtotal').textContent = `${formatAmount(doc.subtotal)} ر.س`;
+    document.getElementById('i-vat').textContent = `${formatAmount(doc.vat_amount)} ر.س`;
+  } else {
+    subtotalRow.hidden = true;
+    vatRow.hidden = true;
+  }
+
+  document.getElementById('i-total').textContent = `${formatAmount(doc.total)} ر.س`;
+
+  const dueDateRow = document.getElementById('i-due-date-row');
+  if (doc.due_date) {
+    dueDateRow.hidden = false;
+    document.getElementById('i-due-date').textContent = doc.due_date;
+  } else {
+    dueDateRow.hidden = true;
+  }
+
+  const noteSection = document.getElementById('i-note-section');
+  if (doc.note) {
+    noteSection.hidden = false;
+    document.getElementById('i-note').textContent = doc.note;
+  } else {
+    noteSection.hidden = true;
+  }
+
+  showState('state-invoice');
+}
+
 function escapeHtml(s) {
   const div = document.createElement('div');
   div.textContent = s;
@@ -369,10 +423,9 @@ async function init() {
       renderQuotation(result.document, result.verified);
     } else if (result.document_type === 'contract') {
       renderContract(result.document, result.verified);
+    } else if (result.document_type === 'invoice') {
+      renderInvoice(result.document);
     } else {
-      // Invoice client view lands in step 5 — nothing can create a share
-      // link of that type yet, so this path is currently unreachable, but
-      // fails safely rather than showing a blank page.
       showState('state-error');
     }
   } catch (e) {
@@ -450,6 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('q-decline-btn').addEventListener('click', () => requestDecision('rejected'));
   document.getElementById('q-download-btn').addEventListener('click', () => window.print());
   document.getElementById('c-download-btn').addEventListener('click', () => window.print());
+  document.getElementById('i-download-btn').addEventListener('click', () => window.print());
 
   document.getElementById('identity-confirm-btn').addEventListener('click', submitIdentity);
   document.getElementById('identity-cancel-btn').addEventListener('click', () => {
